@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FloatingParticles, ScrollProgress } from '../common/AnimationComponents';
-import { Header } from './Header';
-import { Footer } from './Footer';
+import { FloatingParticles, ScrollProgress } from '../components/common/AnimationComponents';
+import { Header } from '../components/layouts/Header';
+import { Footer } from '../components/layouts/Footer';
 
 interface PremiumLayoutProps {
   children: React.ReactNode;

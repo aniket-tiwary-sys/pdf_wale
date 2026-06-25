@@ -1,10 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
 import { cn } from '../../utils/helpers';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string;
-  children: React.ReactNode;
+interface CardProps extends Omit<HTMLMotionProps<'div'>, 'ref'> {
   hover?: boolean;
 }
 

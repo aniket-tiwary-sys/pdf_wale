@@ -275,7 +275,7 @@ export class PDFService {
     }
 
     const pdfBytes = await pdfDoc.save();
-    return new Blob([pdfBytes], { type: 'application/pdf' });
+    return new Blob([new Uint8Array(pdfBytes as any)], { type: 'application/pdf' });
   }
 
   static async compressPDF(file: File): Promise<Blob> {

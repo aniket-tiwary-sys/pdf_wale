@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { containerVariants, itemVariants } from '../utils/animations';
-import { Button } from './common/PremiumButton';
-import { PremiumCard } from './common/PremiumCard';
+import { containerVariants, itemVariants } from '../../utils/animations';
+import { Button } from '../common/PremiumButton';
+import { PremiumCard } from '../common/PremiumCard';
 import { FileText, Zap, Lock, Sparkles } from 'lucide-react';
 
 export const PremiumHeroSection: React.FC = () => {

@@ -209,10 +209,10 @@ export const TranslatorPage = () => {
               </Button>
               <Button
                 onClick={handleTranslate}
-                disabled={!inputText.trim()}
+                disabled={isLoading || !inputText.trim()}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 flex-1 sm:flex-none"
               >
-                Translate
+                {isLoading ? 'Translating...' : 'Translate'}
               </Button>
               <Button
                 onClick={handleClear}

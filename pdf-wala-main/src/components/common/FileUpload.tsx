@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Upload, X } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { cn } from '../../utils/helpers';
 
 interface FileUploadProps {

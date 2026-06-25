@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, LogOut, User as UserIcon, CreditCard, ChevronDown } from 'lucide-react';
+import { Menu, X, LogOut, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '../common/ThemeToggle';
-import { Button } from '../common/Button';
 import { cn } from '../../utils/helpers';
 import { useAuth } from '../../hooks';
 

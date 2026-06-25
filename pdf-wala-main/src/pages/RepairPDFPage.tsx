@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { motion } from 'framer-motion';
-import { Wrench, Download } from 'lucide-react';
+import { Wrench } from 'lucide-react';
 import { MainLayout } from '../layouts/MainLayout';
 import { FileUpload } from '../components/common/FileUpload';
 import { Button } from '../components/common/Button';

@@ -8,7 +8,7 @@ export const advancedPdfService = {
   // Extract text from PDF
   async extractText(file: File): Promise<string> {
     const arrayBuffer = await file.arrayBuffer();
-    const pdf = await PDFJS.getDocument(arrayBuffer).promise;
+    const pdf = await PDFJS.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
     let text = '';
 
     for (let i = 1; i <= pdf.numPages; i++) {
@@ -23,32 +23,32 @@ export const advancedPdfService = {
   // Get PDF metadata
   async getPdfMetadata(file: File) {
     const arrayBuffer = await file.arrayBuffer();
-    const pdf = await PDFJS.getDocument(arrayBuffer).promise;
+    const pdf = await PDFJS.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
     const metadata = await pdf.getMetadata();
+    const info = metadata.info as any;
 
     return {
-      title: metadata.info?.Title,
-      author: metadata.info?.Author,
-      subject: metadata.info?.Subject,
+      title: info?.Title,
+      author: info?.Author,
+      subject: info?.Subject,
       pages: pdf.numPages,
-      creationDate: metadata.info?.CreationDate,
+      creationDate: info?.CreationDate,
     };
   },
 
   // Convert PDF page to image
   async pdfPageToImage(file: File, pageNum: number): Promise<string> {
     const arrayBuffer = await file.arrayBuffer();
-    const pdf = await PDFJS.getDocument(arrayBuffer).promise;
+    const pdf = await PDFJS.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
     const page = await pdf.getPage(pageNum);
 
     const viewport = page.getViewport({ scale: 2 });
     const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d')!;
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
     await page.render({
-      canvasContext: context,
+      canvas,
       viewport,
     }).promise;
 
@@ -67,7 +67,7 @@ export const advancedPdfService = {
     }
 
     const pdfBytes = await mergedPdf.save();
-    return new Blob([pdfBytes], { type: 'application/pdf' });
+    return new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
   },
 
   // Split PDF
@@ -83,7 +83,7 @@ export const advancedPdfService = {
       pages.forEach((page) => newPdf.addPage(page));
 
       const pdfBytes = await newPdf.save();
-      splits.push(new Blob([pdfBytes], { type: 'application/pdf' }));
+      splits.push(new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' }));
     }
 
     return splits;
@@ -95,24 +95,25 @@ export const advancedPdfService = {
     const pdf = await PDFDocument.load(arrayBuffer);
 
     pdf.getPages().forEach((page) => {
-      page.setRotation((page.getRotation().angle + angle) % 360);
+      const rotation = (page.getRotation().angle + angle) % 360;
+      page.setRotation(rotation as any);
     });
 
     const pdfBytes = await pdf.save();
-    return new Blob([pdfBytes], { type: 'application/pdf' });
+    return new Blob([new Uint8Array(pdfBytes as any)], { type: 'application/pdf' });
   },
 
   // Add watermark to PDF
-  async addWatermark(file: File, text: string): Promise<Blob> {
+  async addWatermark(file: File, _text: string): Promise<Blob> {
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await PDFDocument.load(arrayBuffer);
 
-    pdf.getPages().forEach((page) => {
+    pdf.getPages().forEach(() => {
       // Watermark implementation would go here
       // This is a placeholder
     });
 
     const pdfBytes = await pdf.save();
-    return new Blob([pdfBytes], { type: 'application/pdf' });
+    return new Blob([new Uint8Array(pdfBytes as any)], { type: 'application/pdf' });
   },
 };

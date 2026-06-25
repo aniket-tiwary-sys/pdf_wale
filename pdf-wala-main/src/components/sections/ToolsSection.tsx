@@ -24,7 +24,7 @@ export const ToolsSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {categories.map(([categoryKey, categoryName], categoryIdx) => (
+        {categories.map(([categoryKey, categoryName]) => (
           <div key={categoryKey} className="mb-16">
             <motion.h3
               initial={{ opacity: 0, x: -20 }}

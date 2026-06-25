@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, Eraser } from 'lucide-react';
+import { Eraser } from 'lucide-react';
 import { MainLayout } from '../layouts/MainLayout';
 import { FileUpload } from '../components/common/FileUpload';
 import { Button } from '../components/common/Button';
